@@ -11,6 +11,9 @@ public class ToyScript: MonoBehaviour {
 
     public ToyState toyState;
 
+    public float CompletionTime = 3.0f;
+    public Transform CompletionBar;
+
 
     public enum ToyState
     {
@@ -23,8 +26,10 @@ public class ToyScript: MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-	
-	}
+        CompletionMeter();
+
+
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -33,6 +38,7 @@ public class ToyScript: MonoBehaviour {
         if(toyState == ToyState.Viewing)
         {
             ToyPoints();
+            CompletionMeter();
         }
 
         if(Scr_CharacterController.inst.viewingObject != this.gameObject)
@@ -74,11 +80,21 @@ public class ToyScript: MonoBehaviour {
         ViewPoints = ViewPoints + Time.deltaTime;
         Debug.Log(ViewPoints);
 
-        if (ViewPoints >= 3.0f)
+        if (ViewPoints >= CompletionTime)
         {
             toyState = ToyState.Viewed;
             this.gameObject.GetComponent<MeshRenderer>().material = ToyComplete;
             Debug.Log("Complete");
+            GameController.inst.UpdateToysSeen(1);
         }
+    }
+
+    public void CompletionMeter()
+    {
+        Vector3 TempScale = CompletionBar.localScale;
+
+        TempScale.x = Mathf.Lerp(0, 1, ViewPoints / CompletionTime);
+
+        CompletionBar.localScale = TempScale;
     }
 }

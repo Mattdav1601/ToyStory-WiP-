@@ -48,9 +48,4 @@ public class Scr_CharacterController : MonoBehaviour
             } 
         }
     }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawLine(playerCamera.transform.position, playerCamera.transform.position + playerCamera.transform.forward * 100);
-    }
 }
