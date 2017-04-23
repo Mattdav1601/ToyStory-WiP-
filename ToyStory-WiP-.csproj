@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Script\GameController.cs" />
+    <Compile Include="Assets\Script\ObjectSpawning.cs" />
     <Compile Include="Assets\Script\Scr_CharacterController.cs" />
     <Compile Include="Assets\Script\ToyScript.cs" />
     <Compile Include="Assets\Script\UIManager.cs" />
